@@ -19,4 +19,12 @@ gdp_data = read_csv("./GDP.csv") %>%
   clean_names() %>% 
   filter(!(value == ".")) %>% 
   mutate(date = as.Date(date))
+
+month_data = read_csv("./pols-month.csv") %>% 
+  clean_names() %>% 
+  na.omit() %>% 
+  rename(date = mon) %>% 
+  mutate(date = floor_date(ymd(date), "month")) %>% 
+  mutate(president = recode(prez_gop, `0` = "dem", `1` = "gop", `2` = "gop")) %>%
+  select(-prez_gop, -prez_dem)
 ```

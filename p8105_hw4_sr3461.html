@@ -133,6 +133,25 @@ $(document).ready(function () {
 ##   DATE = col_date(format = &quot;&quot;),
 ##   VALUE = col_character()
 ## )</code></pre>
+<pre class="r"><code>month_data = read_csv(&quot;./pols-month.csv&quot;) %&gt;% 
+  clean_names() %&gt;% 
+  na.omit() %&gt;% 
+  rename(date = mon) %&gt;% 
+  mutate(date = floor_date(ymd(date), &quot;month&quot;)) %&gt;% 
+  mutate(president = recode(prez_gop, `0` = &quot;dem&quot;, `1` = &quot;gop&quot;, `2` = &quot;gop&quot;)) %&gt;%
+  select(-prez_gop, -prez_dem)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   mon = col_date(format = &quot;&quot;),
+##   prez_gop = col_integer(),
+##   gov_gop = col_integer(),
+##   sen_gop = col_integer(),
+##   rep_gop = col_integer(),
+##   prez_dem = col_integer(),
+##   gov_dem = col_integer(),
+##   sen_dem = col_integer(),
+##   rep_dem = col_integer()
+## )</code></pre>
 
 
 
