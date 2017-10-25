@@ -1,5 +1,5 @@
 ---
-title: "p8105_hw4_sr3461"
+title: "Problem_2"
 author: "Shumin Rui"
 date: "10/24/2017"
 output: html_document
@@ -7,6 +7,10 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(
+  fig.width = 8,
+  fig.asp = 1,
+  out.width = "120%")
 library(readxl)
 library(tidyverse)
 library(dplyr)
@@ -14,12 +18,14 @@ library(janitor)
 library(lubridate)
 ```
 
-```{r}
+```{r tidy the data}
+#import GDP data
 gdp_data = read_csv("./GDP.csv") %>% 
   clean_names() %>% 
   filter(!(value == ".")) %>% 
   mutate(date = as.Date(date))
 
+#import pols dataset
 month_data = read_csv("./pols-month.csv") %>% 
   clean_names() %>% 
   na.omit() %>% 
@@ -28,6 +34,7 @@ month_data = read_csv("./pols-month.csv") %>%
   mutate(president = recode(prez_gop, `0` = "dem", `1` = "gop", `2` = "gop")) %>%
   select(-prez_gop, -prez_dem)
 
+#combine two datasets
 gdp_mon_data <- left_join(gdp_data, month_data, by = "date")
 ```
 
