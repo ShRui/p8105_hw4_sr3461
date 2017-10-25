@@ -27,4 +27,6 @@ month_data = read_csv("./pols-month.csv") %>%
   mutate(date = floor_date(ymd(date), "month")) %>% 
   mutate(president = recode(prez_gop, `0` = "dem", `1` = "gop", `2` = "gop")) %>%
   select(-prez_gop, -prez_dem)
+
+gdp_mon_data <- left_join(gdp_data, month_data, by = "date")
 ```
