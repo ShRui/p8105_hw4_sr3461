@@ -30,3 +30,21 @@ month_data = read_csv("./pols-month.csv") %>%
 
 gdp_mon_data <- left_join(gdp_data, month_data, by = "date")
 ```
+
+
+```{r plot_GDP}
+gdp_mon_data %>%
+  ggplot( aes(x = as.character(date), y = as.numeric(value), fill = president)) + # plot GDP change over time, color of bins depends on president variable
+  geom_bar(stat="identity", width = 1) + # change binwidth to 1
+  labs(
+    title = "GDP change over time", #plot title
+    x = "Date", # x label
+    y = "GDP" # y label
+  ) +
+  theme(legend.position = "bottom", # put legend to the bottom
+        text = element_text(size = 12), # set test front size
+        axis.text.x = element_text(size = 4, angle = 90, hjust = 1) # set x asix test style
+        )
+```
+
+The plot above shows the quarterly GDP change over time from `r gdp_mon_data[1, "date"]` to `r gdp_mon_data[nrow(gdp_mon_data), "date"]`. The dates when the president was democrat are labeled with red, and when the president was republican are labeled in blue. 
