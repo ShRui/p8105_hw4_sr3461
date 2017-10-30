@@ -54,4 +54,4 @@ gdp_mon_data %>%
         )
 ```
 
-The plot above shows the quarterly GDP change over time from `r gdp_mon_data[1, "date"]` to `r gdp_mon_data[nrow(gdp_mon_data), "date"]`. The dates when the president was democrat are labeled with red, and when the president was republican are labeled in blue. 
+The plot above shows the quarterly GDP change over time from `r gdp_mon_data[1, "date"]` to `r gdp_mon_data[nrow(gdp_mon_data), "date"]`. The dates when the president was democrat are labeled with red, and when the president was republican are labeled in blue. According to the plot, it is hard to find the association between GDP and the political party of the president, but we can see how it change over time.
